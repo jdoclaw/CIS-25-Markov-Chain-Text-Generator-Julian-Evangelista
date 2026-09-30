@@ -33,4 +33,7 @@ int main() {
         std::cout << getRandomPrefix(prefixes, chainSize) << std::endl;
     }
 
+    std::string output = generateText(prefixes, suffixes, chainSize, 1, 20);
+    std::cout << output << std::endl;
+
 }
