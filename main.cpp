@@ -3,11 +3,13 @@
 #include "Markov.h"
 
 int main() {
+    std::string prefixes[1000], suffixes[1000];
     std::string words[1000];
     int count = readWordsFromFile("test.txt", words, 1000);
-    std::cout << "Read " << count << " words" << std::endl;
-    for (int i = 0; i < 10 && i < count; i++) {
-        std::cout << words[i] << std::endl;
+
+    int chainSize = buildMarkovChain(words, count, 2, prefixes, suffixes, 1000);
+    for (int i = 0; i < 20 && i < chainSize; i++) {
+        std::cout << "[" << prefixes[i] << "] -> [" << suffixes[i] << "]" << std::endl;
     }
 
 }
