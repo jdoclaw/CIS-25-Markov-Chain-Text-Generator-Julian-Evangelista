@@ -7,8 +7,10 @@ using namespace std;
 string joinWords(const std::string words[], int startIndex, int count) {
     string result = "";
     for (int i = 0; i < count; i++) {
-        result += words[startIndex + i]; // add spaces?
-        result += " ";
+        if (i > 0) {
+            result += " ";
+        }
+        result += words[startIndex + i];
     }
     return result;
 
@@ -44,4 +46,30 @@ int buildMarkovChain(const std::string words[], int numWords, int order, std::st
             }
             return count;
         }
+    }
+
+std::string getRandomSuffix(const std::string prefixes[], const std::string suffixes[],int chainSize, 
+    std::string currentPrefix) {
+        int matchCount = 0;
+        for (int i = 0; i < chainSize; i++) {
+            if (prefixes[i] == currentPrefix) {
+                matchCount++;
+            }
+        }
+        if (matchCount == 0) {
+            return "";
+        }
+
+        int pick = std::rand() % matchCount;
+        int secondCount = 0;
+        for (int i = 0; i < chainSize; i++) {
+            
+            if (prefixes[i] == currentPrefix) {
+                if (secondCount == pick) {
+                    return suffixes[i];
+                }
+                secondCount++;
+            }
+        }
+        return "";
     }
